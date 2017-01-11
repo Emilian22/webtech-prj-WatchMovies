@@ -6,8 +6,8 @@ const app=angular.module('moviesApp',[
     app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
         $urlRouterProvider.otherwise('/genres')
         $stateProvider
-            .state("about",{
-                url:'/about',
+            .state("home",{
+                url:'/home',
                 template:'<h3>Welcome to my movie collection</h3>'
             })
             .state('genres',{
