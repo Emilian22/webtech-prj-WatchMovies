@@ -1,0 +1,69 @@
+<div id="pageBackground"></div>
+<div id="page">
+<div id="PageInner">
+  <div class="PageTitle cacat">{{genre.name}}</div>
+  <div id="genre_visual_description">{{genre.description}}</div>
+  <div class="PageTitle">Movies List</div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th><th>Duration</th><th>Year</th><th>Director</th><th>URL</th><th>Watched</th><th></th>
+      </tr>
+    </thead>
+    <tr ng-repeat="movie in movies" ng-include="getTemplate(movie)">
+    </tr>
+  </table>
+  <a ui-sref="genres">Back To Genres!</a>
+  <div class="PageTitle" ng-click="arata()">Add a movie</div>
+  <form id="addMovieForm">
+    <label class="label2" for="movieTitle">Title</label>
+    <input type="text" id="movieTitle" ng-model="movie.mTitle" />
+    </br>
+    <label class="label2" for="movieDuration">Duration</label>
+    <input type="text" id="movieDuration" ng-model="movie.mDuration"/>
+    </br>
+    <label class="label2" for="movieYear">Year</label>
+    <input type="text" id="movieYear" ng-model="movie.mYear"/>
+    </br>
+    <label class="label2" for="movieDirector">Director</label>
+    <input type="text" id="movieDirector" ng-model="movie.mDirector"/>
+    </br>
+    <label class="label2" for="movieURL">URL</label>
+    <input type="text" id="movieURL" ng-model="movie.mURL"/>
+    </br>
+    <label class="label2" for="movieWatched">Watched</label>
+    <input type="text" id="movieWatched" ng-model="movie.mWatched"/>
+    </br>
+    <input type="button" id="AddMovieButton"value="Add" ng-click="addMovie(movie)" />
+    <div class="space2"></div>
+  </form>
+
+  <script type="text/ng-template" id="display">
+    <td>{{movie.mTitle}}</td>
+    <td>{{movie.mDuration}}</td>
+    <td>{{movie.mYear}}</td>
+    <td>{{movie.mDirector}}</td>
+    <td>{{movie.mURL}}</td>
+    <td>{{movie.mWatched}}</td>
+    <td>
+      <input type="button" value="delete" ng-click="deleteMovie(movie)" />
+      <input type="button" value="edit" ng-click="editMovie(movie)" />
+    </td>
+  </script>
+  <script type="text/ng-template" id="edit">
+    <td>
+      <input type="text" ng-model="movie.mTitle" />
+    </td>
+    <td><input type="text" ng-model="movie.mDuration"/></td>
+    <td><input type="text" ng-model="movie.mYear"/></td>
+    <td><input type="text" ng-model="movie.mDirector"/></td>
+    <td><input type="text" ng-model="movie.mURL"/></td>
+    <td><input type="text" ng-model="movie.mWatched"/></td>
+    <td>
+      <input type="button" value="Save" ng-click="saveMovie(movie)" />
+      <input type="button" value="Cancel" ng-click="cancelEditing()" />
+    </td>
+  </script>
+  
+</div>
+</div>
