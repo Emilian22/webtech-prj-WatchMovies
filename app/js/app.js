@@ -8,7 +8,7 @@ const app=angular.module('moviesApp',[
         $stateProvider
             .state("home",{
                 url:'/home',
-                template:'<h3>Welcome to my movie collection</h3>'
+                templateUrl:'views/home.html'
             })
             .state('genres',{
                 url:'/genres',
@@ -19,6 +19,11 @@ const app=angular.module('moviesApp',[
                 url:'/genres/:genreId/movies',
                 templateUrl:'views/genresMovies.html',
                 controller:'genreMoviesController'
+            })
+            .state('movies',{
+                url:'/movies',
+                templateUrl:'views/movies.html',
+                controller:'movieController'
             })
     }])
     

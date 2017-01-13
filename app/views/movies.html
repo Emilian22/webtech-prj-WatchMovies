@@ -1,0 +1,35 @@
+<div id='pageBackground'></div>
+<div id='page'>
+    <div id="PageInner">
+        </br>
+        </br>
+        </br>
+        </br>
+        <div class="PageTitle">All Movies!</div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Duration</th>
+                    <th>Year</th>
+                    <th>Director</th>
+                    <th>URL</th>
+                    <th>Watched</th>
+                    <th>ID genre</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr ng-repeat="movie in movies" ng-include="getTemplate(movie)">
+            </tr>
+        </table>
+        <script type="text/ng-template" id="display">
+            <td>{{movie.mTitle}}</td>
+            <td>{{movie.mDuration}}</td>
+            <td>{{movie.mYear}}</td>
+            <td>{{movie.mDirector}}</td>
+            <td>{{movie.mURL}}</td>
+            <td>{{movie.mWatched}}</td>
+            <td>{{movie.genreId}}</td>
+        </script>
+    </div>
+</div>

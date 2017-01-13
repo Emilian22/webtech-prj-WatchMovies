@@ -89,3 +89,27 @@ input.ng-pristine.ng-untouched.ng-valid.ng-not-empty {
     width:150px;
     margin:0 auto;
 }
+.SiteMenu{
+    position:relative;
+    z-index:2;
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 1px;
+    width:620px;
+}
+.SiteMenu li{
+    float:left;
+}
+.SiteMenu li a {
+    display: inline-block;
+    background-color: black;
+    text-align:center;
+    font-size: 45px;
+    text-decoration: none;
+    padding: 5px;
+    color: white;
+}
+.SiteMenu li a:hover {
+    background-color: white;
+    color:black;
+}

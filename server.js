@@ -245,4 +245,17 @@ app.delete('/genres/:id/movies/:mId',(req,res)=>{
             res.status(500).send('eroare')
         })
 })
+app.get('/movies',(req,res)=>{
+    Movie
+    .findAll({
+        attributes:['id','mTitle','mDuration','mYear','mDirector','mURL','mWatched','genreId']
+    })
+    .then((movies)=>{
+        res.status(200).send(movies)
+    })
+    .catch((error)=>{
+        console.warn(error)
+        res.status(500).send('eroare')
+    })
+})
 app.listen(8080)
