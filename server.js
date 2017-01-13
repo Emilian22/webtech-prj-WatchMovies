@@ -3,10 +3,11 @@ const express=require('express');
 const bodyParser=require('body-parser');
 const Sequelize=require('sequelize');
 const sequelize=new Sequelize('moviesdb','mrnobody22','');
-
+const cors=require('cors');
 let app=express()
 app.use(express.static(__dirname+'/app'))
 app.use(bodyParser.json())
+app.use(cors())
 
 let Genre=sequelize.define('genre',{
     name:{
