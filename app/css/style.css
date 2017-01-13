@@ -113,3 +113,24 @@ input.ng-pristine.ng-untouched.ng-valid.ng-not-empty {
     background-color: white;
     color:black;
 }
+#Welcome{
+    text-align:center;
+    font-size:40px;
+    font-weight:bold;
+}
+.MenuInstructions{
+    text-align:center;
+    font-size:30px;
+}
+#AddingThings{
+    text-align:center;
+    font-size:30px;
+}
+#AddingMovies{
+    text-align:center;
+    font-size:30px;
+}
+#Enjoy{
+    text-align:center;
+    font-size:40px;
+}
