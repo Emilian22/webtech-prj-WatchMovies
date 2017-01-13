@@ -19,15 +19,20 @@
         <div class="PageTitle">Add Genre</div>
         <form name="addForm">
             <label class="label1" for="genreName">Name</label>
-            <input type="text" id="genreName" ng-model="genre.name" />
+            <input type="text" id="genreName" name="genreName" ng-model="genre.name" required/>
             <br/>
             <div class='space'></div>
             <label class="label1" for="genreDescription">Description</label>
-            <input type="text" id="genreDescription" ng-model="genre.description" />
+            <input type="text" id="genreDescription"/>
             <br/>
             <div class='space'></div>
             <input type="button" id="AddGenreButton" value="Add" ng-Click="addGenre(genre)" />
             <div class='space2'></div>
+            <div ng-messages="addForm.genreName.$error">
+                <div ng-message="required" role="alert">
+                    The Genre Name Can't Contain Numbers!
+                </div>
+            </div>
         </form>
         <script type="text/ng-template" id='display'>
             <td class='nameColumn'>{{genre.name}}</td>

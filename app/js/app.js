@@ -1,7 +1,8 @@
 'use strict'
 const app=angular.module('moviesApp',[
     'ui.router',
-    'genreModule'
+    'genreModule',
+    'ngMessages'
     ])
     app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
         $urlRouterProvider.otherwise('/genres')

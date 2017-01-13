@@ -1,261 +1,278 @@
 'use strict'
-const express=require('express');
-const bodyParser=require('body-parser');
-const Sequelize=require('sequelize');
-const sequelize=new Sequelize('moviesdb','mrnobody22','');
-const cors=require('cors');
-let app=express()
-app.use(express.static(__dirname+'/app'))
+const express = require('express');
+const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('moviesdb', 'mrnobody22', '');
+const cors = require('cors');
+let app = express()
+app.use(express.static(__dirname + '/app'))
 app.use(bodyParser.json())
 app.use(cors())
 
-let Genre=sequelize.define('genre',{
-    name:{
-        allowNull:false,
-        type:Sequelize.STRING
+let Genre = sequelize.define('genre', {
+    name: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        validate: {
+            is: ["^[a-z]+$", 'i'],
+        }
     },
-    description:{
-        allowNull:false,
-        type:Sequelize.STRING
+    description: {
+        allowNull: false,
+        type: Sequelize.STRING
     }
 })
 
-let Movie=sequelize.define('movie',{
-    mTitle:{
-        allowNull:false,
-        type:Sequelize.STRING
+let Movie = sequelize.define('movie', {
+    mTitle: {
+        allowNull: false,
+        type: Sequelize.STRING
     },
-    mDuration:{
-        allowNull:false,
-        type:Sequelize.STRING
+    mDuration: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        validate: {
+            contains:"h",
+        },
     },
-    mYear:{
-        allowNull:false,
-        type:Sequelize.STRING
+    mYear: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        validate:{min:1896,max:2017}
     },
-    mDirector:{
-        allowNull:false,
-        type:Sequelize.STRING
+    mDirector: {
+        allowNull: false,
+        type: Sequelize.STRING
     },
-    mURL:{
-        allowNull:false,
-        type:Sequelize.STRING
+    mURL: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        validate:{
+            isUrl:true,
+        }
     },
-    mWatched:{
-        allowNull:false,
-        type:Sequelize.STRING
+    mWatched: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        validate:{
+            WatchedFunction:function(){
+                if(this.mWatched!=="Yes"&&this.mWatched!=="No"){
+                    throw new Error("Introduceti Yes sau No")
+                }
+            }
+        }
     }
 })
 
-Genre.hasMany(Movie,{
-    foreignKey:'genreId'
+Genre.hasMany(Movie, {
+    foreignKey: 'genreId'
 })
 
-Movie.belongsTo(Genre,{
-    foreignKey:'genreId'
+Movie.belongsTo(Genre, {
+    foreignKey: 'genreId'
 })
 
-app.get('/create',(req,res)=>{
+app.get('/create', (req, res) => {
     sequelize
         .sync({
-            force:true
+            force: true
         })
-        .then(()=>{
+        .then(() => {
             res.status(201).send('creat')
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
 
-app.get('/genres',(req,res)=>{
+app.get('/genres', (req, res) => {
     Genre
-    .findAll({
-        attributes:['id','name','description']
-    })
-    .then((genres)=>{
-        res.status(200).send(genres)
-    })
-    .catch((error)=>{
-        console.warn(error)
-        res.status(500).send('eroare')
-    })
+        .findAll({
+            attributes: ['id', 'name', 'description']
+        })
+        .then((genres) => {
+            res.status(200).send(genres)
+        })
+        .catch((error) => {
+            console.warn(error)
+            res.status(500).send('eroare')
+        })
 })
-app.post('/genres',(req,res)=>{
+app.post('/genres', (req, res) => {
     Genre
         .create(req.body)
-        .then(()=>{
+        .then(() => {
             res.status(201).send('creat')
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
 
-app.get('/genres/:id',(req,res)=>{
+app.get('/genres/:id', (req, res) => {
     Genre
         .find({
-            attributs:['id','name','description'],
-            where:{
-                id:req.params.id
+            attributs: ['id', 'name', 'description'],
+            where: {
+                id: req.params.id
             }
         })
-        .then((genre)=>{
+        .then((genre) => {
             res.status(200).send(genre)
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
-app.delete('/genres/:id',(req,res)=>{
+app.delete('/genres/:id', (req, res) => {
     Genre
         .find({
-            where:{
-                id:req.params.id
+            where: {
+                id: req.params.id
             }
         })
-        .then((genre)=>{
+        .then((genre) => {
             return genre.destroy()
         })
-        .then(()=>{
+        .then(() => {
             res.status(201).send('sters')
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
-app.put('/genres/:id',(req,res)=>{
+app.put('/genres/:id', (req, res) => {
     Genre
         .find({
-            where:{
-                id:req.params.id
+            where: {
+                id: req.params.id
             }
         })
-        .then((genre)=>{
+        .then((genre) => {
             return genre.updateAttributes(req.body)
         })
-        .then(()=>{
+        .then(() => {
             res.status(201).send('modificat')
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
-app.get('/genres/:id/movies',(req,res)=>{
+app.get('/genres/:id/movies', (req, res) => {
     Genre
         .find({
-            where:{
-                id:req.params.id
+            where: {
+                id: req.params.id
             },
-            include:[Movie]
+            include: [Movie]
         })
-        .then((genre)=>{
+        .then((genre) => {
             return genre.getMovies()
         })
-        .then((movies)=>{
+        .then((movies) => {
             res.status(200).send(movies)
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
-app.get('/genres/:id/movies/:mId',(req,res)=>{
+app.get('/genres/:id/movies/:mId', (req, res) => {
     Movie
         .find({
-            attributes:['id','mTitle','mDuration','mYear','mDirector','mURL','mWatched'],
-            where:{
-                id:req.params.id
+            attributes: ['id', 'mTitle', 'mDuration', 'mYear', 'mDirector', 'mURL', 'mWatched'],
+            where: {
+                id: req.params.id
             }
         })
-        .then((movie)=>{
+        .then((movie) => {
             res.status(200).send(movie)
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
-app.post('/genres/:id/movies',(req,res)=>{
+app.post('/genres/:id/movies', (req, res) => {
     Genre
         .find({
-            where:{
-                id:req.params.id
+            where: {
+                id: req.params.id
             }
         })
-        .then((genre)=>{
-            let movie=req.body
-            movie.genreId=genre.id
+        .then((genre) => {
+            let movie = req.body
+            movie.genreId = genre.id
             return Movie.create(movie)
         })
-        .then(()=>{
+        .then(() => {
             res.status(201).send('creat')
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
 
-app.put('/genres/:id/movies/:mId',(req,res)=>{
+app.put('/genres/:id/movies/:mId', (req, res) => {
     Movie
         .find({
-            where:{
-                id:req.params.mId
+            where: {
+                id: req.params.mId
             }
         })
-        .then((movie)=>{
-            movie.mTitle=req.body.mTitle
-            movie.mDuration=req.body.mDuration
-            movie.mYear=req.body.mYear
-            movie.mDirector=req.body.mDirector
-            movie.mURL=req.body.mURL
-            movie.mWatched=req.body.mWatched
+        .then((movie) => {
+            movie.mTitle = req.body.mTitle
+            movie.mDuration = req.body.mDuration
+            movie.mYear = req.body.mYear
+            movie.mDirector = req.body.mDirector
+            movie.mURL = req.body.mURL
+            movie.mWatched = req.body.mWatched
             return movie.save()
         })
-        .then(()=>{
+        .then(() => {
             res.status(201).send('modificat')
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
 
-app.delete('/genres/:id/movies/:mId',(req,res)=>{
+app.delete('/genres/:id/movies/:mId', (req, res) => {
     Movie
         .find({
-            where:{
-                id:req.params.mId
+            where: {
+                id: req.params.mId
             }
         })
-        .then((movie)=>{
+        .then((movie) => {
             return movie.destroy()
         })
-        .then(()=>{
+        .then(() => {
             res.status(201).send('sters')
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.warn(error)
             res.status(500).send('eroare')
         })
 })
-app.get('/movies',(req,res)=>{
+app.get('/movies', (req, res) => {
     Movie
-    .findAll({
-        attributes:['id','mTitle','mDuration','mYear','mDirector','mURL','mWatched','genreId']
-    })
-    .then((movies)=>{
-        res.status(200).send(movies)
-    })
-    .catch((error)=>{
-        console.warn(error)
-        res.status(500).send('eroare')
-    })
+        .findAll({
+            attributes: ['id', 'mTitle', 'mDuration', 'mYear', 'mDirector', 'mURL', 'mWatched', 'genreId']
+        })
+        .then((movies) => {
+            res.status(200).send(movies)
+        })
+        .catch((error) => {
+            console.warn(error)
+            res.status(500).send('eroare')
+        })
 })
 app.listen(8080)
