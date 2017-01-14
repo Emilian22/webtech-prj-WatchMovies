@@ -16,21 +16,21 @@
             </thead>
             <tr ng-repeat="genre in genres" ng-include="getTemplate(genre)"></tr>
         </table>
-        <div class="PageTitle">Add Genre</div>
+        <div class="PageTitle">Add a Genre</div>
         <form name="addForm">
             <label class="label1" for="genreName">Name</label>
             <input type="text" id="genreName" name="genreName" ng-model="genre.name" required/>
             <div role="alert">
-                <div class="error goood" ng-show="addForm.genreName.$error.required"> Nu lasa campul nume gol!</div>
-                </div>
+                <div class="error goood" ng-show="addForm.genreName.$error.required"> Câmpul 'Name' trebuie completat! </div>
+            </div>
             <br/>
             <label class="label1" for="genreDescription">Description</label>
             <input type="text" id="genreDescription" name="genreDescription" ng-model="genre.description" required>
-            <div role="alert"> 
-                <div class="error goood" ng-show="addForm.genreDescription.$error.required"> Nu lasa campul description gol</div>
+            <div role="alert">
+                <div class="error goood" ng-show="addForm.genreDescription.$error.required"> Câmpul 'Description' trebuie completat! </div>
             </div>
             <br/>
-            <input type="button" id="AddGenreButton" value="Add" ng-Click="addGenre(genre)" />
+            <input type="button" id="AddGenreButton" value="Add Genre" ng-Click="addGenre(genre)" />
             <div class='space2'></div>
         </form>
         <script type="text/ng-template" id='display'>

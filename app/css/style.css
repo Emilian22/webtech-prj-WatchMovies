@@ -1,149 +1,187 @@
-.PageTitle{
-    font-size:60px;
-    text-align:center;
+.PageTitle {
+    font-size: 60px;
+    text-align: center;
 }
-td{
-    text-align:center;
+
+td {
+    text-align: center;
 }
-thead tr th{
-    text-align:center;
+
+thead tr th {
+    text-align: center;
 }
-#PageInner{
-    width:80%;
-    margin:0 auto;
+
+#PageInner {
+    width: 80%;
+    margin: 0 auto;
     background-color: #ffffff;
 }
-.Descriere{
-    word-wrap:break-word;
-    width:60%;
-    max-width:250px;
+
+.Descriere {
+    word-wrap: break-word;
+    width: 60%;
+    max-width: 250px;
 }
-#genreName, #genreDescription{
-    width:50%;
-    margin:0 auto;
+
+#genreName,
+#genreDescription {
+    width: 50%;
+    margin: 0 auto;
 }
-.label1{
-    width:200px;
-    padding-left:20px;
+
+.label1 {
+    width: 200px;
+    padding-left: 20px;
 }
-.space{
-    margin-bottom:30px;
+
+.space {
+    margin-bottom: 30px;
 }
-#AddGenreButton{
-    display:block;
-    width:150px;
-    margin:0 auto;
+
+#AddGenreButton {
+    display: block;
+    width: 150px;
+    margin: 0 auto;
 }
-.dreaptaButtons{
-    width:20%;
+
+.dreaptaButtons {
+    width: 20%;
 }
-.nameColumn{
-    width:20%;
+
+.nameColumn {
+    width: 20%;
 }
-#page{
-    width:100%;
+
+#page {
+    width: 100%;
     min-height: 100%;
-    position:relative;
-    z-index:1;
+    position: relative;
+    z-index: 1;
 }
+
 #addMovieForm {
-    display:none;
+    display: none;
 }
-#genre_visual_description{
-    font-size:20px;
-    text-align:center;
+
+#genre_visual_description {
+    font-size: 20px;
+    text-align: center;
 }
-.label2{
-    width:20%;
-    padding-left:25px;
+
+.label2 {
+    width: 20%;
+    padding-left: 25px;
 }
+
 .ng-scope {
-    min-height:100%;
+    min-height: 100%;
 }
+
 .space2 {
     padding-bottom: 30px;
 }
+
 #pageBackground {
-    width:100%;
-    position:fixed;
-    top:0;
-    left:0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 0;
     background-color: #C0C0C0;
 }
+
 .numee {
-    background-color:red;
+    background-color: red;
 }
+
 #genre_visual_description {
-    background-color:red;
+    background-color: red;
 }
+
 td.ng-scope {
     width: 14%;
     padding: 20px 10px !important;
 }
+
 input.ng-pristine.ng-untouched.ng-valid.ng-not-empty {
     width: 100%;
 }
-#AddMovieButton{
-    display:block;
-    width:150px;
-    margin:0 auto;
+
+#AddMovieButton {
+    display: block;
+    width: 150px;
+    margin: 0 auto;
 }
-.SiteMenu{
-    position:relative;
-    z-index:2;
+
+.SiteMenu {
+    position: relative;
+    z-index: 2;
     list-style-type: none;
     margin: 0 auto;
     padding: 1px;
-    width:620px;
+    width: 620px;
 }
-.SiteMenu li{
-    float:left;
+
+.SiteMenu li {
+    float: left;
 }
+
 .SiteMenu li a {
     display: inline-block;
     background-color: black;
-    text-align:center;
+    text-align: center;
     font-size: 45px;
     text-decoration: none;
     padding: 5px;
     color: white;
 }
+
 .SiteMenu li a:hover {
     background-color: white;
-    color:black;
+    color: black;
 }
-#Welcome{
-    text-align:center;
-    font-size:40px;
-    font-weight:bold;
-}
-.MenuInstructions{
-    text-align:center;
-    font-size:30px;
-}
-#AddingThings{
-    text-align:center;
-    font-size:30px;
-}
-#AddingMovies{
-    text-align:center;
-    font-size:30px;
-}
-#Enjoy{
-    text-align:center;
-    font-size:40px;
+
+#Welcome {
+    text-align: center;
+    font-size: 40px;
     font-weight: bold;
-    color:red;
 }
-.error{
-    color:red;
-    width:600px;
-    text-align:center;
+
+.MenuInstructions {
+    text-align: center;
+    font-size: 30px;
 }
-.goood{
-    margin:0 auto;
+
+#AddingThings {
+    text-align: center;
+    font-size: 30px;
 }
-#bam{
-    font-size:29px;
+
+#AddingMovies {
+    text-align: center;
+    font-size: 30px;
+}
+
+#Enjoy {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+}
+
+.error {
+    color: red;
+    width: 600px;
+    text-align: center;
+}
+
+.goood {
+    margin: 0 auto;
+}
+
+#bam {
+    font-size: 29px;
+}
+.hooveeer:hover{
+    cursor:pointer;
 }

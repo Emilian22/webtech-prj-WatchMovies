@@ -24,7 +24,7 @@
       </tr>
     </table>
     <a ui-sref="genres">Back To Genres!</a>
-    <div class="PageTitle" ng-click="arata()">Add a movie</div>
+    <div class="PageTitle hooveeer" ng-click="arata()">Add a Movie</div>
     <form id="addMovieForm" name="addMovieForm">
       <label class="label2" for="movieTitle">Title</label>
       <input type="text" id="movieTitle" name="movieTitle" ng-model="movie.mTitle" required/>
@@ -57,13 +57,13 @@
         <div class="error baad" ng-show="addMovieForm.movieURL.$error.url"> Textul introdus nu este un URL!</div>
       </div>
       <label class="label2" for="movieWatched">Watched</label>
-      <input type="text" id="movieWatched" name="movieWatched" ng-model="movie.mWatched" required pattern="(Yes|No)"/>
+      <input type="text" id="movieWatched" name="movieWatched" ng-model="movie.mWatched" required pattern="(Yes|No)" />
       <div role="alert">
         <div class="error baad" ng-show="addMovieForm.movieWatched.$error.required">Câmpul 'Watched' trebuie completat!</div>
         <div class="error baad" ng-show="addMovieForm.movieWatched.$error.pattern"> Trebuie să completați cu 'Yes' sau 'No'</div>
       </div>
       </br>
-      <input type="button" id="AddMovieButton" value="Add" ng-click="addMovie(movie)" />
+      <input type="button" id="AddMovieButton" value="Add Movie" ng-click="addMovie(movie)" />
       <div class="space2"></div>
     </form>
 
