@@ -20,19 +20,18 @@
         <form name="addForm">
             <label class="label1" for="genreName">Name</label>
             <input type="text" id="genreName" name="genreName" ng-model="genre.name" required/>
+            <div role="alert">
+                <div class="error goood" ng-show="addForm.genreName.$error.required"> Nu lasa campul nume gol!</div>
+                </div>
             <br/>
-            <div class='space'></div>
             <label class="label1" for="genreDescription">Description</label>
-            <input type="text" id="genreDescription"/>
+            <input type="text" id="genreDescription" name="genreDescription" ng-model="genre.description" required>
+            <div role="alert"> 
+                <div class="error goood" ng-show="addForm.genreDescription.$error.required"> Nu lasa campul description gol</div>
+            </div>
             <br/>
-            <div class='space'></div>
             <input type="button" id="AddGenreButton" value="Add" ng-Click="addGenre(genre)" />
             <div class='space2'></div>
-            <div ng-messages="addForm.genreName.$error">
-                <div ng-message="required" role="alert">
-                    The Genre Name Can't Contain Numbers!
-                </div>
-            </div>
         </form>
         <script type="text/ng-template" id='display'>
             <td class='nameColumn'>{{genre.name}}</td>

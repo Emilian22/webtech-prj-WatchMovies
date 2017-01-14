@@ -18,7 +18,7 @@ let Genre = sequelize.define('genre', {
         }
     },
     description: {
-        allowNull: false,
+        allowNull:false,
         type: Sequelize.STRING
     }
 })

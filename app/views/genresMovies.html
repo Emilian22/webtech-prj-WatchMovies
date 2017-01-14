@@ -1,73 +1,98 @@
 <div id="pageBackground"></div>
 <div id="page">
-<div id="PageInner">
-       </br>
-        </br>
-        </br>
-        </br>
-  <div class="PageTitle numee">{{genre.name}}</div>
-  <div id="genre_visual_description">{{genre.description}}</div>
-  <div class="PageTitle">Movies List</div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Title</th><th>Duration</th><th>Year</th><th>Director</th><th>URL</th><th>Watched</th><th></th>
+  <div id="PageInner">
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="PageTitle numee">{{genre.name}}</div>
+    <div id="genre_visual_description">{{genre.description}}</div>
+    <div class="PageTitle">Movies List</div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Duration</th>
+          <th>Year</th>
+          <th>Director</th>
+          <th>URL</th>
+          <th>Watched</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tr ng-repeat="movie in movies" ng-include="getTemplate(movie)">
       </tr>
-    </thead>
-    <tr ng-repeat="movie in movies" ng-include="getTemplate(movie)">
-    </tr>
-  </table>
-  <a ui-sref="genres">Back To Genres!</a>
-  <div class="PageTitle" ng-click="arata()">Add a movie</div>
-  <form id="addMovieForm">
-    <label class="label2" for="movieTitle">Title</label>
-    <input type="text" id="movieTitle" ng-model="movie.mTitle" />
-    </br>
-    <label class="label2" for="movieDuration">Duration</label>
-    <input type="text" id="movieDuration" ng-model="movie.mDuration"/>
-    </br>
-    <label class="label2" for="movieYear">Year</label>
-    <input type="text" id="movieYear" ng-model="movie.mYear"/>
-    </br>
-    <label class="label2" for="movieDirector">Director</label>
-    <input type="text" id="movieDirector" ng-model="movie.mDirector"/>
-    </br>
-    <label class="label2" for="movieURL">URL</label>
-    <input type="text" id="movieURL" ng-model="movie.mURL"/>
-    </br>
-    <label class="label2" for="movieWatched">Watched</label>
-    <input type="text" id="movieWatched" ng-model="movie.mWatched"/>
-    </br>
-    <input type="button" id="AddMovieButton"value="Add" ng-click="addMovie(movie)" />
-    <div class="space2"></div>
-  </form>
+    </table>
+    <a ui-sref="genres">Back To Genres!</a>
+    <div class="PageTitle" ng-click="arata()">Add a movie</div>
+    <form id="addMovieForm" name="addMovieForm">
+      <label class="label2" for="movieTitle">Title</label>
+      <input type="text" id="movieTitle" name="movieTitle" ng-model="movie.mTitle" required/>
+      <div role="alert">
+        <div class="error baad" ng-show="addMovieForm.movieTitle.$error.required">Câmpul 'Title' trebuie completat!</div>
+      </div>
+      <label class="label2" for="movieDuration">Duration</label>
+      <input type="text" id="movieDuration" name="movieDuration" ng-model="movie.mDuration" required pattern=".h......">
+      <div role="alert">
+        <div class="error baad" ng-show="addMovieForm.movieDuration.$error.required"> Câmpul 'Duration' trebuie completat!</div>
+        <div class="error baad" ng-show="addMovieForm.movieDuration.$error.pattern"> Trebuie folosit formatul 'Hh MMmin'</div>
+      </div>
+      <label class="label2" for="movieYear">Year</label>
+      <input type="number" id="movieYear" name="movieYear" ng-model="movie.mYear" required min="1896" max="2017" />
+      <div role="alert">
+        <div class="error baad" ng-show="addMovieForm.movieYear.$error.required"> Câmpul 'Year' trebuie completat!</div>
+        <div class="error baad" ng-show="addMovieForm.movieYear.$error.number"> Anul trebuie să fie un număr!</div>
+        <div class="error baad" ng-show="addMovieForm.movieYear.$error.min"> Anul trebuie să depășească 1896!</div>
+        <div class="error baad" ng-show="addMovieForm.movieYear.$error.max">Anul nu poate să depășească 2017</div>
+      </div>
+      <label class="label2" for="movieDirector">Director</label>
+      <input type="text" id="movieDirector" name="movieDirector" ng-model="movie.mDirector" required/>
+      <div role="alert">
+        <div class="error baad" ng-show="addMovieForm.movieDirector.$error.required"> Câmpul 'Director' trebuie completat!</div>
+      </div>
+      <label class="label2" for="movieURL">URL</label>
+      <input type="url" id="movieURL" name="movieURL" ng-model="movie.mURL" required/>
+      <div role="alert">
+        <div class="error baad" ng-show="addMovieForm.movieURL.$error.required"> Câmpul 'URL' trebuie completat!</div>
+        <div class="error baad" ng-show="addMovieForm.movieURL.$error.url"> Textul introdus nu este un URL!</div>
+      </div>
+      <label class="label2" for="movieWatched">Watched</label>
+      <input type="text" id="movieWatched" name="movieWatched" ng-model="movie.mWatched" required pattern="(Yes|No)"/>
+      <div role="alert">
+        <div class="error baad" ng-show="addMovieForm.movieWatched.$error.required">Câmpul 'Watched' trebuie completat!</div>
+        <div class="error baad" ng-show="addMovieForm.movieWatched.$error.pattern"> Trebuie să completați cu 'Yes' sau 'No'</div>
+      </div>
+      </br>
+      <input type="button" id="AddMovieButton" value="Add" ng-click="addMovie(movie)" />
+      <div class="space2"></div>
+    </form>
 
-  <script type="text/ng-template" id="display">
-    <td>{{movie.mTitle}}</td>
-    <td>{{movie.mDuration}}</td>
-    <td>{{movie.mYear}}</td>
-    <td>{{movie.mDirector}}</td>
-    <td>{{movie.mURL}}</td>
-    <td>{{movie.mWatched}}</td>
-    <td>
-      <input type="button" value="delete" ng-click="deleteMovie(movie)" />
-      <input type="button" value="edit" ng-click="editMovie(movie)" />
-    </td>
-  </script>
-  <script type="text/ng-template" id="edit">
-    <td>
-      <input type="text" ng-model="movie.mTitle" />
-    </td>
-    <td><input type="text" ng-model="movie.mDuration"/></td>
-    <td><input type="text" ng-model="movie.mYear"/></td>
-    <td><input type="text" ng-model="movie.mDirector"/></td>
-    <td><input type="text" ng-model="movie.mURL"/></td>
-    <td><input type="text" ng-model="movie.mWatched"/></td>
-    <td>
-      <input type="button" value="Save" ng-click="saveMovie(movie)" />
-      <input type="button" value="Cancel" ng-click="cancelEditing()" />
-    </td>
-  </script>
-  
-</div>
+    <script type="text/ng-template" id="display">
+      <td>{{movie.mTitle}}</td>
+      <td>{{movie.mDuration}}</td>
+      <td>{{movie.mYear}}</td>
+      <td>{{movie.mDirector}}</td>
+      <td>{{movie.mURL}}</td>
+      <td>{{movie.mWatched}}</td>
+      <td>
+        <input type="button" value="delete" ng-click="deleteMovie(movie)" />
+        <input type="button" value="edit" ng-click="editMovie(movie)" />
+      </td>
+    </script>
+    <script type="text/ng-template" id="edit">
+      <td>
+        <input type="text" ng-model="movie.mTitle" />
+      </td>
+      <td><input type="text" ng-model="movie.mDuration" /></td>
+      <td><input type="text" ng-model="movie.mYear" /></td>
+      <td><input type="text" ng-model="movie.mDirector" /></td>
+      <td><input type="text" ng-model="movie.mURL" /></td>
+      <td><input type="text" ng-model="movie.mWatched" /></td>
+      <td>
+        <input type="button" value="Save" ng-click="saveMovie(movie)" />
+        <input type="button" value="Cancel" ng-click="cancelEditing()" />
+      </td>
+    </script>
+
+  </div>
 </div>
